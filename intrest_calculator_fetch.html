@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Interest Calculator
+        </title>
+    </head>
+    <script>
+        function calculate() {
+            const p = document.getElementById("p").value;
+            const t =document.getElementById("t").value;
+            const r = document.getElementById("r").value;
+            fetch("https://sum-server.100xdevs.com/interest?principal="+p+"&rate="+r+"&time="+t)
+            .then(function(response) {
+                response.json()
+                .then(function (ans){
+                    document.getElementById("answer").innerHTML = "Total amount = "+ans["total"]+" & Interest = "+ans["interest"];
+                })
+            })
+        }
+        async function calculate2(){
+            const p = document.getElementById("p").value;
+            const t =document.getElementById("t").value;
+            const r = document.getElementById("r").value;
+            const response = await fetch("https://sum-server.100xdevs.com/interest?principal="+p+"&rate="+r+"&time="+t);
+            const ans = await response.json();
+            document.getElementById("answer").innerHTML = "Total amount = "+ans["total"]+" & Interest = "+ans["interest"];
+        }
+    </script>
+    <body>
+        <div>Principal amount: </div>
+        <input id="p"><br><br/>
+        <div>Rate of Interest: </div>
+        <input id="r"><br><br/>
+        <div>Time: </div>
+        <input id="t"><br><br/>
+        <button onclick="calculate2()">calculate interest</button>
+        <div id="answer"></div>
+    </body>
+</html>

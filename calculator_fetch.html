@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>
+            Calculator using fetch
+        </title>
+    </head>
+    <script>
+        function sum(){
+            const a = document.getElementById("first").value;
+            const b = document.getElementById("second").value;
+            fetch("https://sum-server.100xdevs.com/sum?a="+a+"&b="+b)
+            .then(function(response) {
+                response.text()
+                .then(function(ans) {
+                    document.getElementById("answer").innerHTML=ans;
+                })
+            })
+        }
+        async function sum2(){
+            const a = document.getElementById("first").value;
+            const b = document.getElementById("second").value;
+            const response = await fetch("https://sum-server.100xdevs.com/sum?a="+a+"&b="+b);
+            const ans = await response.text();
+            document.getElementById("answer").innerHTML=ans;
+        }
+    </script>
+    <body>
+        <input id="first" type="text">
+        <input id="second" type="text">
+        <button onclick="sum2()">Calculate Sum</button>
+        <div id="answer"></div>
+    </body>
+</html>

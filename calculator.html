@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>calculator</title>
+    </head>
+    <script>
+        function populateDiv(){
+            const a = document.getElementById("first").value;
+            const b = document.getElementById("second").value;
+            document.getElementById("finalSum").innerHTML = Number(a) + Number(b);
+        }
+    </script>
+    <body>
+        <input id="first" placeholder="First Number">
+        <br><br>
+        <input id="second" placeholder="Second Number">
+        <br><br>
+        <button onclick="populateDiv()">Calculate sum</button><br><br/>
+        <div id="finalSum"></div>
+    </body>
+</html>
