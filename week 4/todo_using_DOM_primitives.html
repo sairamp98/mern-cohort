@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TODO using DOM Primitives
+        </title>
+    </head>
+    <script>
+        function todo(){
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const outerdiv = document.createElement("div");
+            const innerdiv1 = document.createElement("div");
+            innerdiv1.innerHTML = title;
+            const innerdiv2 = document.createElement("div");
+            innerdiv2.innerHTML = description;
+            const innerbutton = document.createElement("button");
+            innerbutton.innerHTML = "Mark as done";
+            outerdiv.appendChild(innerdiv1);
+            outerdiv.appendChild(innerdiv2);
+            outerdiv.appendChild(innerbutton);
+            document.getElementById("container").appendChild(outerdiv);
+
+        }
+    </script>
+    <body>
+        <input id="title" type="text" placeholder="title"><br><br/>
+        <input id="description" type="text" placeholder="description"><br><br/>
+        <button onclick="todo()">Add todo</button>
+        <div id="container"></div>
+    </body>
+</html>
