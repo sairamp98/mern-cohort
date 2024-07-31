@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Basic Debouncing
+        </title>
+    </head>
+    <script>
+        let timeout;
+        function debounce(){
+            clearTimeout(timeout);
+            timeout = setTimeout(function(){calculateSum()},1000);
+        }
+
+        function calculateSum(){
+            const a = document.getElementById("first").value;
+            const b = document.getElementById("second").value;
+            fetch("https://sum-server.100xdevs.com/sum?a="+a+"&b="+b)
+            .then(function(response){
+                response.text()
+                .then(function(answer){
+                    document.getElementById("answer").innerHTML = answer;
+                })
+            })
+        }
+    </script>
+    <body>
+        <input oninput="debounce()" id="first" placeholder="Enter first number">
+        <input oninput="debounce()" id="second" placeholder="Enter second number">
+        <div id = "answer"></div>
+    </body>
+</html>
