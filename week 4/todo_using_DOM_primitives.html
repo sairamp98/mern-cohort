@@ -5,12 +5,16 @@
             TODO using DOM Primitives
         </title>
     </head>
+    
+    
+    <body>
+        <input id="title" type="text" placeholder="title"><br><br/>
+        <input id="description" type="text" placeholder="description"><br><br/>
+        <div id="container"></div>
+       
+    </body>
     <script>
         let globalid=1;
-        function markasdone(parentId){
-            const parent = document.getElementById(parentId);
-            parent.children[2].innerHTML = "Done!";
-        }
         function createChild(title, description, id){
             const outerdiv = document.createElement("div");
             outerdiv.setAttribute("id",id);
@@ -24,18 +28,40 @@
             outerdiv.appendChild(innerdiv1);
             outerdiv.appendChild(innerdiv2);
             outerdiv.appendChild(innerbutton);
-            document.getElementById("container").appendChild(outerdiv);
+            return outerdiv;
+            
         }
         function todo(){
             const title = document.getElementById("title").value;
             const description = document.getElementById("description").value;
             createChild(title, description, globalid++);
         }
+        //what if todos are given as a list of objects
+        function updateAccToState(state){
+            document.getElementById("container").innerHTML = "";
+            for(let i=0;i<state.length;i++) {
+                const outerdiv = createChild(state[i].title, state[i].description, state[i].id);
+                document.getElementById("container").appendChild(outerdiv);
+            }
+        }
+        let state = [{
+            title: "task 1",
+            description: "desc 1",
+            id: 1,
+        }, {
+            title: "task 2",
+            description: "desc 2",
+            id: 2,
+        }, {
+            title: "task 3",
+            description: "desc 3",
+            id: 3,
+        }]
+        window.setInterval(async function() { 
+            const response = await fetch("https://sum-server.100xdevs.com/todos");
+            const random_state = await response.json();
+            updateAccToState(random_state.todos);
+        }, 1000);
+        
     </script>
-    <body>
-        <input id="title" type="text" placeholder="title"><br><br/>
-        <input id="description" type="text" placeholder="description"><br><br/>
-        <button onclick="todo()">Add todo</button>
-        <div id="container"></div>
-    </body>
 </html>
