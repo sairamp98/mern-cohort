@@ -6,21 +6,30 @@
         </title>
     </head>
     <script>
-        function todo(){
-            const title = document.getElementById("title").value;
-            const description = document.getElementById("description").value;
+        let globalid=1;
+        function markasdone(parentId){
+            const parent = document.getElementById(parentId);
+            parent.children[2].innerHTML = "Done!";
+        }
+        function createChild(title, description, id){
             const outerdiv = document.createElement("div");
+            outerdiv.setAttribute("id",id);
             const innerdiv1 = document.createElement("div");
             innerdiv1.innerHTML = title;
             const innerdiv2 = document.createElement("div");
             innerdiv2.innerHTML = description;
             const innerbutton = document.createElement("button");
             innerbutton.innerHTML = "Mark as done";
+            innerbutton.setAttribute("onclick", `markasdone(${id})`);
             outerdiv.appendChild(innerdiv1);
             outerdiv.appendChild(innerdiv2);
             outerdiv.appendChild(innerbutton);
             document.getElementById("container").appendChild(outerdiv);
-
+        }
+        function todo(){
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            createChild(title, description, globalid++);
         }
     </script>
     <body>
