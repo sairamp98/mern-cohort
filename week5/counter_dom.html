@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        function increment(){
+            const cnt = document.getElementById("counter").innerHTML;
+            let num = cnt.split(" ");
+            num = parseInt(num[1]);
+            num++;
+            document.getElementById("counter").innerHTML = "Count "+num;
+        }
+    </script>
+    <body>
+        <button id="counter" onclick="increment()">Count 0</button>
+    </body>
+</html>
